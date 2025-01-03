@@ -1,0 +1,26 @@
+class Solution {
+public:
+    bool isValidSudoku(vector<vector<char>>& board) {
+         vector<vector<bool>> rows(9,vector<bool>(9,false));
+         vector<vector<bool>> cols(9,vector<bool>(9,false));
+         vector<vector<bool>> grids(9,vector<bool>(9,false));
+
+        for(int i=0;i<board.size();i++){
+            for(int j=0;j<board.size();j++){
+                if(board[i][j]!='.') {
+                    int num = board[i][j] - '1' ;  // take the number
+                    int boxIdx = (i/3)*3 + (j/3); // formula for grid index 
+                
+                 if(rows[i][num] || cols[j][num] || grids[boxIdx][num]) return false; // if elem's postion is true , iska mtlb ye h ki hame wo element mil chuka h uss jagah k liye 
+              
+              // jo num mila and jo grid ka idx mila h usse bool flag true kro uss number k liye
+            rows[i][num] = true;
+            cols[j][num] = true;
+            grids[boxIdx][num] = true;
+               }
+           
+            }
+        }
+        return true;
+    }
+};
