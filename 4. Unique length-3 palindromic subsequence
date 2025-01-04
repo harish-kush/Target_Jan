@@ -1,0 +1,22 @@
+class Solution {
+public:
+    typedef pair<int,int> pi;
+    int countPalindromicSubsequence(string s) {
+        int n = s.size();
+        // map banao jisme char, {starting idx of char, ending idx of char}
+        unordered_map<char,pi>mp;
+        for(int i=0;i<n;i++){
+            if(!mp.count(s[i])) mp[s[i]].first = mp[s[i]].second = i;
+            else mp[s[i]].second = i;
+        }
+        int count = 0;
+
+        for(auto [c,se] : mp){
+            if(se.first==se.second) continue;
+  // char k starting idx se ending idx tk jitne bhi unique char h unko set me daalo and count me add krdo uska size 
+            unordered_set<char>ans(s.begin()+se.first+1, s.begin()+se.second);
+            count+= ans.size();
+        }
+       return count;
+    }
+};
