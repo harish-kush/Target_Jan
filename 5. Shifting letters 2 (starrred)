@@ -1,0 +1,29 @@
+class Solution {
+public:
+    string shiftingLetters(string s, vector<vector<int>>& shifts) {
+        int n = s.size();
+        vector<int> diff(n + 1, 0); 
+
+    
+        for (auto shift : shifts) {
+            int start = shift[0];  
+            int end = shift[1];   
+            int dir = shift[2];   
+
+            diff[start] += (dir == 1 ? 1 : -1); 
+            if (end + 1 < n) {
+                diff[end + 1] += (dir == 1 ? -1 : 1); 
+            }
+        }
+
+        int prefixSum = 0;
+       
+        for (int i = 0; i < n; i++) {
+            prefixSum = (prefixSum + diff[i]) % 26;  
+            if (prefixSum < 0) prefixSum += 26;  
+           
+            s[i] = 'a' + (s[i] - 'a' + prefixSum) % 26; 
+        }
+        return s;
+    }
+};
