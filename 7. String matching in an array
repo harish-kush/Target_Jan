@@ -1,0 +1,20 @@
+class Solution {
+public:
+    bool isSubstring(string a, string b){
+        return b.find(a)!= string::npos;  // if a is find in b it returns true else false 
+    }
+    vector<string> stringMatching(vector<string>& words) {
+        vector<string>ans;
+        int n = words.size();
+
+        for(int i=0;i<n;i++){
+            for(int j=0;j<n;j++){
+                if(i!=j && isSubstring(words[i],words[j])){
+                    ans.push_back(words[i]);
+                    break;
+                }
+            }
+        }
+        return ans;
+    }
+};
