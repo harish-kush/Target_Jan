@@ -1,0 +1,21 @@
+class Solution {
+public:
+    /* for palindromic , u know that frequency of character should be even like for aebea the odd char is less that even char , in this sol :-
+    1. we find chars freq
+    2. we count odd counts
+    3. if they are less than or equal to k we return true
+    */
+    bool canConstruct(string s, int k) {
+        unordered_map<char,int>mp;
+        if(s.size()<k) return false;
+        for(int i=0;i<s.size();i++) mp[s[i]]++;
+
+        int oddCount = 0;
+        for(auto x : mp){
+            if(x.second%2!=0) oddCount++;
+        }
+        if(oddCount<=k) return true;
+
+        return false;
+    }
+};
