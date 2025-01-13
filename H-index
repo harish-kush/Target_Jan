@@ -1,0 +1,16 @@
+class Solution {
+public:
+    /*
+    h index ka matlb ye h ki agr index 1 h toh 1 se jyada arr me elements present hone chaiye jinka citation 1 ho
+    eg :- for h index 3 = 3,6,5 but for h index 4 = 3,6,5 which is wrong
+    */
+    int hIndex(vector<int>& s) {
+        sort(s.begin(),s.end(),greater<int>());
+        int hIndex = 0;
+        for(int i=0;i<s.size();i++){
+            if(s[i]>=i+1) hIndex++;
+            else break;
+        }
+        return hIndex;
+    }
+};
