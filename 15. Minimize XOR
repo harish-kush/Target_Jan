@@ -1,0 +1,32 @@
+class Solution {
+public:
+    int countbits(int n) {
+        int count = 0;
+        while (n > 0) {
+            count += (n & 1);
+            n >>= 1;
+        }
+        return count;
+    }
+
+    int minimizeXor(int num1, int num2) {
+        int sb2 = countbits(num2); 
+        int result = 0;
+
+        for (int i = 31; i >= 0 && sb2 > 0; i--) {
+            if (num1 & (1 << i)) {
+                result |= (1 << i); 
+                sb2--;
+            }
+        }
+
+        for (int i = 0; i < 32 && sb2 > 0; i++) {
+            if (!(result & (1 << i))) { 
+                result |= (1 << i); 
+                sb2--; 
+            }
+        }
+
+        return result;
+    }
+};
