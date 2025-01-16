@@ -1,0 +1,21 @@
+class Solution {
+public:
+    int xorAllNums(vector<int>& nums1, vector<int>& nums2) {
+        int n1 = nums1.size();
+        int n2 = nums2.size();
+        int ans1 = 0;
+        int ans2 = 0;
+        for(int num : nums1) ans1^=num;
+        for(int num : nums2) ans2^=num;
+        /*as u know a^a = 0
+        that means if a is even number of time it will be zero,
+        therefore last me toh hame xor hiii krna h sabhi numbers ka ki check kro ki kis array ka size odd h ,
+        jiska size odd hoga wo ans me contribute krega 
+        */
+        int ans = 0;
+        if (n1 % 2 != 0) ans ^= ans2;
+        if(n2 % 2 != 0) ans^=ans1;
+
+        return ans;
+    }
+};
