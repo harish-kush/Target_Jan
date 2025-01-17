@@ -1,0 +1,16 @@
+class Solution {
+public:
+    /*
+    derived = (a^b),(b^c),(a^c) , therefore from example we can say that when there exist a original array then each element is repeating twice , 
+    and we know that when a number occurs even number of time the result will be zero 
+    */
+    bool doesValidArrayExist(vector<int>& derived) {
+        int ans = derived[0];
+        int n = derived.size();
+        for(int i=1;i<n;i++){
+            ans^=derived[i];
+        }
+        if(ans==0) return true;
+        else return false; 
+    }
+};
