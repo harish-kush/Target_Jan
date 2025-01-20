@@ -1,0 +1,31 @@
+class Solution {
+public:
+    /*
+    make a map which consist number, {row,col}
+    ek row count vector and col count vector banao and initialize it with 0
+    loop chalao aur agr uss value pr row count ka koi bhi index== no of cols ho jaata h ya
+    col count ka koi bhi index == no of rows ho jaate h toh return the index of value
+    */
+    typedef pair<int,int> pi;
+    int firstCompleteIndex(vector<int>& arr, vector<vector<int>>& mat) {
+        int n = mat.size();
+        int m = mat[0].size();
+        unordered_map<int,pi>mp;
+        for(int i=0;i<n;i++){
+            for(int j=0;j<m;j++){
+                mp[mat[i][j]] = {i,j};
+            }
+        }
+        vector<int>row_count(n,0);
+        vector<int>col_count(m,0);
+
+        for(int idx = 0 ; idx<arr.size() ; idx++) {
+            int val = arr[idx];
+            auto [row,col] = mp[val];
+            row_count[row]++;
+            col_count[col]++;
+            if(row_count[row]==m || col_count[col]==n) return idx;
+        }
+        return -1;
+    }
+};
