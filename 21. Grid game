@@ -1,0 +1,14 @@
+class Solution {
+public:
+    typedef long long ll;
+    long long gridGame(vector<vector<int>>& grid) {
+        ll upperSum = accumulate(grid[0].begin(),grid[0].end(),0LL); // sum of all elems in row 1
+        ll lowerSum = 0, minSecondRobotPoints = LLONG_MAX;
+        for(int col=0;col<grid[0].size();col++){
+            upperSum-=grid[0][col];
+            minSecondRobotPoints = min(minSecondRobotPoints, max(upperSum,lowerSum));
+            lowerSum+=grid[1][col];
+        }
+        return minSecondRobotPoints;
+    }
+};
