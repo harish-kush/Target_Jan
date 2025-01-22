@@ -1,0 +1,26 @@
+class Solution {
+public:
+    vector<vector<int>> highestPeak(vector<vector<int>>& arr) {
+        int n = arr.size();
+        int m = arr[0].size();
+        vector<vector<int>>h(n,vector<int>(m,m+n));
+        for(int i=0;i<n;i++){
+            for(int j=0;j<m;j++){
+                if(arr[i][j]==1) h[i][j]=0;
+                if(i>0)
+                    h[i][j]=min(h[i][j],h[i-1][j]+1);
+                if(j>0)
+                    h[i][j]= min(h[i][j],h[i][j-1]+1);
+            }
+        }
+        for(int i= n-1;i>=0;i--){
+            for( int j= m-1;j>=0;j--){
+              if(i<n-1)  
+                  h[i][j]= min(h[i][j],h[i+1][j]+1);
+                if(j<m-1)
+                    h[i][j]= min(h[i][j],h[i][j+1]+1);
+            }
+        }
+        return h;
+    }
+};
